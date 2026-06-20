@@ -1296,7 +1296,8 @@
   </footer>
 
   <script>
-    const API_URL = 'http://localhost:5000/api';
+    // ✅ API URL updated to deployed backend
+    const API_URL = 'https://herbal-garden-06lm.onrender.com/api';
 
     // --- Utilities
     const INR = v => `₹${Number(v).toFixed(0)}`;
@@ -1481,7 +1482,17 @@
       }
     }
 
+    // ✅ Updated addToCart with login check
     function addToCart(product, size, price, qty = 1) {
+      const token = getToken();
+      if (!token) {
+        showNotification('⚠️ Please login first.');
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1000);
+        return;
+      }
+
       const existing = CART.find(i => i.productId === (product._id || product.name) && i.size === size);
       if (existing) {
         existing.quantity += qty;
@@ -1525,8 +1536,17 @@
     document.getElementById('cartClose').addEventListener('click', closeCart);
     cartOverlay.addEventListener('click', closeCart);
 
-    // Cart checkout button
+    // ✅ Cart checkout button with login check
     document.getElementById('cartCheckoutBtn').addEventListener('click', () => {
+      const token = getToken();
+      if (!token) {
+        showNotification('⚠️ Please login first.');
+        setTimeout(() => {
+          window.location.href = 'login.html';
+        }, 1000);
+        return;
+      }
+
       if (!CART.length) return;
       closeCart();
       const cartTotal = CART.reduce((s, i) => s + i.price * i.quantity, 0);
@@ -1814,13 +1834,21 @@
           qtyVal.textContent = parseInt(qtyVal.textContent) + 1;
         });
 
-        // Add to cart
+        // ✅ Add to cart with login check
         card.querySelector('.btn-add').addEventListener('click', () => {
           addToCart(product, selVariant.size, selVariant.price, parseInt(qtyVal.textContent));
         });
 
-        // Buy now
+        // ✅ Buy now with login check
         card.querySelector('.btn-buy').addEventListener('click', () => {
+          const token = getToken();
+          if (!token) {
+            showNotification('⚠️ Please login first.');
+            setTimeout(() => {
+              window.location.href = 'login.html';
+            }, 1000);
+            return;
+          }
           openCheckoutPanel(product, selVariant.size, selVariant.price, parseInt(qtyVal.textContent), 'direct');
         });
 
