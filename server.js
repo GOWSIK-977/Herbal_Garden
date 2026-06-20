@@ -13,7 +13,7 @@ connectDB();
 
 const app = express();
 
-// CORS Configuration - Allow all origins dynamically for local development
+// CORS Configuration
 app.use(cors({
   origin: function (origin, callback) {
     callback(null, true);
@@ -27,17 +27,25 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static files for images
+// Serve static files from project root
+app.use(express.static(__dirname));
+
+// Static images
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
-// Routes
+// API Routes
 app.use('/api/auth', require('./backend/routes/authRoutes'));
 app.use('/api/products', require('./backend/routes/productRoutes'));
 app.use('/api/cart', require('./backend/routes/cartRoutes'));
 app.use('/api/orders', require('./backend/routes/orderRoutes'));
 app.use('/api/contact', require('./backend/routes/contactRoutes'));
 
-// Health check
+// Home Route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Health Check Route
 app.get('/health', (req, res) => {
   res.json({
     status: 'OK',
@@ -46,11 +54,12 @@ app.get('/health', (req, res) => {
   });
 });
 
-// Error handler
+// Error Handler
 app.use(errorHandler);
 
-// Start server
+// Start Server
 const PORT = process.env.PORT || 5000;
+
 const server = app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
   console.log(`🌿 Virtual Herbal Garden API ready`);
@@ -58,12 +67,10 @@ const server = app.listen(PORT, () => {
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
-// Handle port already in use error
+// Handle Server Errors
 server.on('error', (err) => {
   if (err.code === 'EADDRINUSE') {
     console.error(`❌ Port ${PORT} is already in use!`);
-    console.log(`💡 Run this to fix: netstat -ano | findstr :${PORT}`);
-    console.log(`   Then: taskkill /PID <PID> /F`);
     process.exit(1);
   }
 });
