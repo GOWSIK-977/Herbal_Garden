@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Herbal Garden</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    /* Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    :root {
+      --primary: #2e7d32;
+      --primary-light: #4caf50;
+      --primary-dark: #1b5e20;
+      --accent: #ffeb3b;
+      --accent-dark: #fbc02d;
+      --text: #333;
+      --text-light: #666;
+      --background: #f8fbf8;
+      --white: #ffffff;
+      --card-bg: #ffffff;
+      --shadow: 0 5px 15px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    
+    /* Navigation */
+    .top-nav {
+      background: var(--primary);
+      color: var(--white);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: var(--shadow);
+    }
+    
+    .logo { 
+      font-size: 24px; 
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .logo i {
+      color: var(--accent);
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav ul li a, .lang-btn {
+      text-decoration: none;
+      color: var(--white);
+      font-weight: 500;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    nav ul li a:hover, .lang-btn:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+    
+    .nav-btn {
+      background: var(--accent);
+      color: var(--primary-dark);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .nav-btn:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+    }
+    
+    .menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background-color: var(--white);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    
+    /* Hero Section */
+    .hero-section {
+      text-align: center;
+      padding: 100px 20px;
+      background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30" fill="none" stroke="%23000" stroke-width="2"/></svg>');
+      background-size: 200px;
+      opacity: 0.1;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-title {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+    
+    .search-box {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    
+    .search-box input {
+      padding: 16px 25px;
+      width: 100%;
+      max-width: 450px;
+      border-radius: 50px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .search-box input:focus {
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transform: translateY(-2px);
+    }
+    
+    .search-btn, .camera-btn {
+      border: none;
+      padding: 16px 25px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: var(--transition);
+      background: var(--primary-dark);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow);
+      font-weight: 500;
+    }
+    
+    .search-btn:hover, .camera-btn:hover {
+      transform: translateY(-3px);
+      background: var(--accent);
+      color: var(--primary-dark);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    
+    /* Feature Cards */
+    .features-section {
+      padding: 80px 20px;
+      background: var(--background);
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--primary-light);
+      margin: 15px auto;
+      border-radius: 2px;
+    }
+    
+    .feature-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+      border-top: 5px solid var(--primary-light);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .feature-card i {
+      font-size: 50px;
+      color: var(--primary);
+      margin-bottom: 20px;
+      background: rgba(76, 175, 80, 0.1);
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+    }
+    
+    .feature-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+    
+    /* Gamification Section */
+    .gamification-section {
+      padding: 80px 20px;
+      background: var(--white);
+    }
+    
+    .challenges-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+    
+    .challenge-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .challenge-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--primary);
+    }
+    
+    .challenge-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .badge-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 30px;
+      justify-content: center;
+    }
+    
+    .badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--card-bg);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      width: 120px;
+    }
+    
+    .badge:hover {
+      transform: scale(1.05);
+    }
+    
+    .badge i {
+      font-size: 40px;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    
+    .badge.locked i {
+      color: var(--text-light);
+    }
+    
+    .badge span {
+      font-size: 14px;
+      text-align: center;
+      font-weight: 500;
+    }
+    
+    /* Quiz Modal */
+    .quiz-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .quiz-modal.active {
+      display: flex;
+    }
+    
+    .quiz-content {
+      background: var(--white);
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+    
+    .close-quiz {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: var(--transition);
+    }
+    
+    .close-quiz:hover {
+      color: var(--primary);
+    }
+    
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .quiz-progress {
+      height: 10px;
+      background: #e0e0e0;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    
+    .quiz-progress-bar {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 5px;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    
+    .quiz-question {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+    
+    .quiz-options {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+    
+    .quiz-option {
+      padding: 15px;
+      background: #f5f5f5;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+    
+    .quiz-option:hover {
+      background: #e8f5e9;
+    }
+    
+    .quiz-option.selected {
+      border-color: var(--primary);
+      background: #e8f5e9;
+    }
+    
+    .quiz-option.correct {
+      border-color: #4caf50;
+      background: #e8f5e9;
+    }
+    
+    .quiz-option.incorrect {
+      border-color: #f44336;
+      background: #ffebee;
+    }
+    
+    .quiz-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .quiz-score {
+      font-weight: 600;
+      color: var(--primary);
+    }
+    
+    /* Sustainability Section */
+    .sustainability-section {
+      padding: 80px 20px;
+      background: var(--background);
+    }
+    
+    .sustainability-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    
+    .sustainability-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+    
+    .sustainability-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .sustainability-card.endangered {
+      border-left: 5px solid #f44336;
+    }
+    
+    .sustainability-card.sustainable {
+      border-left: 5px solid #4caf50;
+    }
+    
+    .card-header {
+      padding: 20px;
+      background: var(--primary-light);
+      color: var(--white);
+    }
+    
+    .card-body {
+      padding: 20px;
+    }
+    
+    .card-body ul {
+      padding-left: 20px;
+      margin: 15px 0;
+    }
+    
+    .card-body li {
+      margin-bottom: 8px;
+    }
+    
+    /* Government Integration Section */
+    .government-section {
+      padding: 80px 20px;
+      background: var(--white);
+    }
+    
+    .api-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      padding: 15px;
+      background: #e8f5e9;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: 30px auto;
+    }
+    
+    .status-dot {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #4caf50;
+    }
+    
+    /* Info Section */
+    .info-section {
+      padding: 80px 20px;
+      background: var(--white);
+    }
+    
+    .info-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    
+    /* Footer */
+    .footer {
+      background: var(--primary-dark);
+      color: var(--white);
+      padding: 50px 20px 20px;
+      text-align: center;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      text-align: left;
+      margin-bottom: 40px;
+    }
+    
+    .footer-column h3 {
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+    }
+    
+    .footer-column p, .footer-column li {
+      margin-bottom: 10px;
+      opacity: 0.8;
+    }
+    
+    .footer-column ul {
+      list-style: none;
+    }
+    
+    .footer-column ul li a {
+      color: var(--white);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .footer-column ul li a:hover {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--white);
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      background: var(--accent);
+      color: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+    
+    .copyright {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      margin-top: 20px;
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 1200px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+    }
+    
+    @media (max-width: 992px) {
+      .top-nav {
+        padding: 15px 20px;
+      }
+      
+      nav ul {
+        gap: 15px;
+      }
+      
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .feature-cards,
+      .challenges-container,
+      .sustainability-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary);
+        padding: 20px;
+        gap: 20px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        z-index: 1000;
+      }
+      
+      nav ul.active {
+        display: flex;
+      }
+      
+      .hero-section {
+        padding: 80px 20px;
+      }
+      
+      .hero-title {
+        font-size: 2rem;
+      }
+      
+      .search-box {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .search-box input {
+        max-width: 100%;
+      }
+      
+      .info-section, .table-section, .features-section,
+      .gamification-section, .sustainability-section, .government-section {
+        padding: 60px 20px;
+      }
+      
+      .badge-container {
+        justify-content: center;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 30px;
+      }
+      
+      .footer-column {
+        text-align: center;
+      }
+      
+      .social-links {
+        justify-content: center;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .logo {
+        font-size: 20px;
+      }
+      
+      .hero-title {
+        font-size: 1.8rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+      
+      .search-btn, .camera-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      
+      .feature-cards,
+      .challenges-container,
+      .sustainability-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .badge {
+        width: 100px;
+      }
+      
+      .quiz-content {
+        padding: 20px;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .hero-title {
+        font-size: 1.6rem;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      .feature-card, .challenge-card, .sustainability-card {
+        padding: 20px 15px;
+      }
+    }
+    
+    /* Animation for buttons */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    /* Utility Classes */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 25px;
+      background: var(--primary);
+      color: var(--white);
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+    
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+    
+    .btn-accent {
+      background: var(--accent);
+      color: var(--primary-dark);
+    }
+    
+    .btn-accent:hover {
+      background: #ffd600;
+    }
+    
+    .text-center {
+      text-align: center;
+    }
+    
+    .mt-20 {
+      margin-top: 20px;
+    }
+    
+    .mb-20 {
+      margin-bottom: 20px;
+    }
+    
+    .ml-10 {
+      margin-left: 10px;
+    }
+    
+    .mt-40 {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="top-nav">
+    <div class="logo">
+      <i class="fas fa-leaf"></i>
+      <span>Virtual Herbal Garden</span>
+    </div>
+    
+    <div class="menu-toggle" id="mobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <nav>
+      <ul id="navLinks">
+        <li><a href="index.html"><i class="fas fa-home"></i> HOME</a></li>
+        <li><a href="search.html"><i class="fas fa-search"></i> SEARCH</a></li>
+        <li><a href="location.html"><i class="fas fa-map-marker-alt"></i> LOCATIONS</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> ABOUT</a></li>
+        <li><a href="shop.html"><i class="fas fa-shopping-cart"></i> SHOP</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> CONTACT</a></li>
+        <li id="loginLi"><a href="login.html" class="nav-btn"><i class="fas fa-user"></i> LOGIN</a></li>
+        <li id="userLi" style="display: none;"><a href="#" class="nav-btn"><i class="fas fa-user-circle"></i> <span id="userNameText">User</span></a></li>
+        <li id="logoutLi" style="display: none;"><a href="logout.html" class="nav-btn" style="background: #f44336;"><i class="fas fa-sign-out-alt"></i> LOGOUT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <h1 class="hero-title">Discover Healing Herbs</h1>
+      <p class="hero-subtitle">Explore the ancient wisdom of Ayurvedic medicine and natural healing</p>
+      
+      <div class="search-box">
+        <input type="text" id="homeSearchInput" placeholder="Search herbs, remedies, benefits..." />
+        <button class="camera-btn" id="cameraBtn"><i class="fas fa-camera"></i> Scan Plant</button>
+        <button class="search-btn" id="homeSearchBtn"><i class="fas fa-search"></i> Search</button>
+        <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="section-title">Explore Herbal Benefits</h2>
+      
+      <div class="feature-cards">
+        <div class="feature-card">
+          <i class="fas fa-seedling"></i>
+          <h3>Medicinal Plants</h3>
+          <p>Discover powerful healing plants and their therapeutic properties</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-mortar-pestle"></i>
+          <h3>Herbal Remedies</h3>
+          <p>Natural solutions for common ailments and wellness support</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-book-open"></i>
+          <h3>Ayurvedic Wisdom</h3>
+          <p>Learn about ancient healing traditions and their modern applications</p>
+        </div>
+      </div>
+      
+      <div class="text-center mt-20">
+        <a href="#" class="btn btn-accent"><i class="fas fa-book"></i> Explore All Herbs</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gamification Section -->
+  <section class="gamification-section">
+    <div class="container">
+      <h2 class="section-title">Learning Challenges</h2>
+      
+      <div class="challenges-container">
+        <div class="challenge-card">
+          <h3>Plant Identification Quiz</h3>
+          <p>Test your knowledge of medicinal plants with our interactive quiz</p>
+          <button class="btn mt-20" id="startQuizBtn"><i class="fas fa-play"></i> Start Quiz</button>
+        </div>
+        
+        <div class="challenge-card">
+          <h3>Weekly Challenges</h3>
+          <p>Complete weekly tasks to earn points and badges</p>
+          <button class="btn mt-20" id="viewChallengesBtn"><i class="fas fa-tasks"></i> View Challenges</button>
+        </div>
+      </div>
+      
+      <h3 class="text-center mt-40">Your Badges</h3>
+      <div class="badge-container">
+        <div class="badge">
+          <i class="fas fa-seedling"></i>
+          <span>Herb Explorer</span>
+        </div>
+        <div class="badge">
+          <i class="fas fa-book"></i>
+          <span>Knowledge Seeker</span>
+        </div>
+        <div class="badge locked">
+          <i class="fas fa-trophy"></i>
+          <span>Master Herbalist</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiz Modal -->
+  <div class="quiz-modal" id="quizModal">
+    <div class="quiz-content">
+      <span class="close-quiz" id="closeQuiz">&times;</span>
+      <div class="quiz-header">
+        <h2>Plant Identification Quiz</h2>
+        <p>Test your knowledge of medicinal plants</p>
+      </div>
+      
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar" id="quizProgress"></div>
+      </div>
+      
+      <div class="quiz-question" id="quizQuestion"></div>
+      
+      <div class="quiz-options" id="quizOptions"></div>
+      
+      <div class="quiz-footer">
+        <div class="quiz-score" id="quizScore">Score: 0</div>
+        <button class="btn btn-accent" id="nextQuestionBtn">Next Question</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Challenges Modal -->
+  <div class="quiz-modal" id="challengesModal">
+    <div class="quiz-content">
+      <span class="close-quiz" id="closeChallenges">&times;</span>
+      <div class="quiz-header">
+        <h2>Weekly Challenges</h2>
+        <p>Complete these challenges to earn rewards</p>
+      </div>
+      
+      <div class="card-body">
+        <h3>This Week's Challenges</h3>
+        
+        <ul>
+          <li>Identify 5 different medicinal plants</li>
+          <li>Learn about 3 Ayurvedic remedies</li>
+          <li>Share a sustainable harvesting tip</li>
+          <li>Complete the plant identification quiz</li>
+        </ul>
+        
+        <h3 class="mt-20">Rewards</h3>
+        <p>Complete all challenges to earn the 'Weekly Herbalist' badge and 500 points!</p>
+        
+        <div class="text-center mt-20">
+          <button class="btn"><i class="fas fa-calendar-check"></i> Mark as Completed</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sustainability Section -->
+  <section class="sustainability-section">
+    <div class="container">
+      <h2 class="section-title">Sustainable Practices</h2>
+      
+      <div class="sustainability-cards">
+        <div class="sustainability-card endangered">
+          <div class="card-header">
+            <h3>Endangered Medicinal Plants</h3>
+          </div>
+          <div class="card-body">
+            <p>These plants need special conservation efforts:</p>
+            <ul>
+              <li>Sarpagandha (Rauvolfia serpentina)</li>
+              <li>Kutki (Picrorhiza kurroa)</li>
+              <li>Jatamansi (Nardostachys jatamansi)</li>
+            </ul>
+            <a href="#" class="btn"><i class="fas fa-info-circle"></i> Learn More</a>
+          </div>
+        </div>
+        
+        <div class="sustainability-card sustainable">
+          <div class="card-header">
+            <h3>Sustainable Harvesting</h3>
+          </div>
+          <div class="card-body">
+            <p>Best practices for sustainable herbal cultivation:</p>
+            <ul>
+              <li>Harvest only mature plants</li>
+              <li>Leave enough plants for regeneration</li>
+              <li>Practice organic cultivation methods</li>
+            </ul>
+            <a href="#" class="btn"><i class="fas fa-download"></i> Download Guide</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Government Integration Section -->
+  <section class="government-section">
+    <div class="container">
+      <h2 class="section-title">Government Resources</h2>
+      
+      <div class="info-content">
+        <p>Our platform integrates with official AYUSH and National Medicinal Plants Board databases to provide authentic information about medicinal plants and their uses.</p>
+        
+        <div class="api-status">
+          <div class="status-dot"></div>
+          <span>Connected to NMPB Database</span>
+        </div>
+        
+        <div class="text-center mt-20">
+          <a href="#" class="btn"><i class="fas fa-external-link-alt"></i> Visit NMPB Portal</a>
+          <a href="#" class="btn btn-accent ml-10"><i class="fas fa-database"></i> AYUSH Resources</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Section -->
+  <section class="info-section">
+    <div class="container">
+      <div class="info-content">
+        <h2 class="section-title">The Power of Natural Healing</h2>
+        <p>For thousands of years, cultures around the world have relied on the healing properties of herbs. Our virtual herbal garden brings this ancient wisdom into the digital age, making it accessible to everyone. Explore the benefits of Ayurveda, traditional Chinese medicine, and other natural healing traditions through our comprehensive database of medicinal plants and their applications.</p>
+        
+        <div class="text-center mt-20">
+          <a href="#" class="btn"><i class="fas fa-play-circle"></i> Watch Introduction</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Virtual Herbal Garden</h3>
+          <p>Discover the healing power of nature through our comprehensive database of medicinal plants and traditional remedies.</p>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#"><i class="fas fa-arrow-right"></i> Medicinal Plants</a></li>
+            <li><a href="#"><i class="fas fa-arrow-right"></i> Herbal Remedies</a></li>
+            <li><a href="#"><i class="fas fa-arrow-right"></i> Ayurveda Guide</a></li>
+            <li><a href="#"><i class="fas fa-arrow-right"></i> Wellness Blog</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <p><i class="fas fa-map-marker-alt"></i> 123 Garden Way, Herbal City</p>
+          <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+          <p><i class="fas fa-envelope"></i> info@herbalgarden.com</p>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>© 2023 Virtual Herbal Garden | Connecting traditional wisdom with modern technology</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Quiz Questions
+    const quizQuestions = [
+      {
+        question: "Which plant is known as 'Holy Basil' in English?",
+        options: [
+          { text: "Tulsi", correct: true },
+          { text: "Neem", correct: false },
+          { text: "Aloe Vera", correct: false },
+          { text: "Turmeric", correct: false }
+        ]
+      },
+      {
+        question: "Which medicinal plant is commonly used for skin treatments?",
+        options: [
+          { text: "Ashwagandha", correct: false },
+          { text: "Aloe Vera", correct: true },
+          { text: "Turmeric", correct: false },
+          { text: "Tulsi", correct: false }
+        ]
+      },
+      {
+        question: "Which plant is known for its anti-inflammatory properties?",
+        options: [
+          { text: "Neem", correct: false },
+          { text: "Turmeric", correct: true },
+          { text: "Tulsi", correct: false },
+          { text: "Ashwagandha", correct: false }
+        ]
+      },
+      {
+        question: "Which herb is traditionally used to reduce stress and anxiety?",
+        options: [
+          { text: "Turmeric", correct: false },
+          { text: "Neem", correct: false },
+          { text: "Ashwagandha", correct: true },
+          { text: "Aloe Vera", correct: false }
+        ]
+      },
+      {
+        question: "Which plant is known for its blood-purifying properties?",
+        options: [
+          { text: "Tulsi", correct: false },
+          { text: "Neem", correct: true },
+          { text: "Turmeric", correct: false },
+          { text: "Aloe Vera", correct: false }
+        ]
+      }
+    ];
+
+    // --- Mobile Menu Toggle ---
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navLinks = document.getElementById('navLinks');
+    
+    mobileMenu.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.top-nav') && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        mobileMenu.classList.remove('active');
+      }
+    });
+
+    // --- Camera Button Functionality ---
+    const cameraBtn = document.getElementById('cameraBtn');
+    const cameraInput = document.getElementById('cameraInput');
+    const homeSearchInput = document.getElementById('homeSearchInput');
+
+    cameraBtn.addEventListener('click', () => {
+      cameraInput.click();
+    });
+
+    cameraInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        const plantNames = ["Tulsi (Holy Basil)", "Turmeric", "Aloe Vera", "Neem", "Ashwagandha"];
+        const randomPlant = plantNames[Math.floor(Math.random() * plantNames.length)];
+        homeSearchInput.value = randomPlant;
+        alert(`Plant identified: ${randomPlant}. This plant is known for its medicinal properties.`);
+      }
+    });
+
+    // --- Search Button Functionality ---
+    document.getElementById('homeSearchBtn').addEventListener('click', () => {
+      const searchTerm = homeSearchInput.value.trim();
+      if (searchTerm) {
+        alert(`Searching for: ${searchTerm}\nIn a real application, this would show results for your search.`);
+      } else {
+        alert('Please enter a search term first.');
+      }
+    });
+
+    // --- Quiz Functionality ---
+    const quizModal = document.getElementById('quizModal');
+    const closeQuiz = document.getElementById('closeQuiz');
+    const startQuizBtn = document.getElementById('startQuizBtn');
+    const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+    const quizQuestion = document.getElementById('quizQuestion');
+    const quizOptions = document.getElementById('quizOptions');
+    const quizProgress = document.getElementById('quizProgress');
+    const quizScore = document.getElementById('quizScore');
+    
+    let currentQuestion = 0;
+    let score = 0;
+    let quizActive = false;
+    
+    startQuizBtn.addEventListener('click', () => {
+      quizModal.classList.add('active');
+      currentQuestion = 0;
+      score = 0;
+      quizActive = true;
+      loadQuestion();
+    });
+    
+    closeQuiz.addEventListener('click', () => {
+      quizModal.classList.remove('active');
+      quizActive = false;
+    });
+    
+    nextQuestionBtn.addEventListener('click', () => {
+      currentQuestion++;
+      if (currentQuestion < quizQuestions.length) {
+        loadQuestion();
+      } else {
+        quizQuestion.innerHTML = `
+          <h3>Quiz Completed!</h3>
+          <p>Your final score: ${score}/${quizQuestions.length}</p>
+        `;
+        quizOptions.innerHTML = '';
+        nextQuestionBtn.textContent = 'Play Again';
+        nextQuestionBtn.onclick = () => {
+          quizModal.classList.remove('active');
+          quizActive = false;
+          nextQuestionBtn.onclick = () => {
+            currentQuestion++;
+            if (currentQuestion < quizQuestions.length) {
+              loadQuestion();
+            }
+          };
+        };
+      }
+    });
+    
+    function loadQuestion() {
+      const question = quizQuestions[currentQuestion];
+      quizQuestion.textContent = question.question;
+      quizProgress.style.width = `${((currentQuestion + 1) / quizQuestions.length) * 100}%`;
+      quizScore.textContent = `Score: ${score}`;
+      quizOptions.innerHTML = '';
+      
+      question.options.forEach((option, index) => {
+        const optionElement = document.createElement('div');
+        optionElement.className = 'quiz-option';
+        optionElement.textContent = option.text;
+        optionElement.addEventListener('click', () => selectOption(optionElement, option.correct));
+        quizOptions.appendChild(optionElement);
+      });
+      
+      nextQuestionBtn.style.display = 'none';
+    }
+    
+    function selectOption(optionElement, isCorrect) {
+      document.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.style.pointerEvents = 'none';
+      });
+      
+      optionElement.classList.add('selected');
+      
+      if (isCorrect) {
+        optionElement.classList.add('correct');
+        score++;
+        quizScore.textContent = `Score: ${score}`;
+      } else {
+        optionElement.classList.add('incorrect');
+        document.querySelectorAll('.quiz-option').forEach(opt => {
+          if (opt.textContent === quizQuestions[currentQuestion].options.find(opt => opt.correct).text) {
+            opt.classList.add('correct');
+          }
+        });
+      }
+      
+      nextQuestionBtn.style.display = 'block';
+    }
+
+    // --- Challenges Modal ---
+    const challengesModal = document.getElementById('challengesModal');
+    const viewChallengesBtn = document.getElementById('viewChallengesBtn');
+    const closeChallenges = document.getElementById('closeChallenges');
+    
+    viewChallengesBtn.addEventListener('click', () => {
+      challengesModal.classList.add('active');
+    });
+    
+    closeChallenges.addEventListener('click', () => {
+      challengesModal.classList.remove('active');
+    });
+
+    // Add animation to feature cards on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const featureCards = document.querySelectorAll('.feature-card');
+      const challengeCards = document.querySelectorAll('.challenge-card');
+      const sustainabilityCards = document.querySelectorAll('.sustainability-card');
+      
+      const animateElements = (elements) => {
+        elements.forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        setTimeout(() => {
+          elements.forEach((el, index) => {
+            setTimeout(() => {
+              el.style.opacity = '1';
+              el.style.transform = 'translateY(0)';
+            }, 200 * index);
+          });
+        }, 500);
+      };
+      
+      animateElements(featureCards);
+      animateElements(challengeCards);
+      animateElements(sustainabilityCards);
+    });
+
+    // Add pulse animation to camera button
+    document.getElementById('cameraBtn').classList.add('pulse');
+
+    // Session Management
+    function checkLoginStatus() {
+      const loggedInUser = localStorage.getItem("loggedInUser");
+      const loginLi = document.getElementById('loginLi');
+      const userLi = document.getElementById('userLi');
+      const logoutLi = document.getElementById('logoutLi');
+      const userNameText = document.getElementById('userNameText');
+      
+      if (loggedInUser) {
+        const user = JSON.parse(loggedInUser);
+        userNameText.textContent = user.name;
+        loginLi.style.display = 'none';
+        userLi.style.display = 'inline-block';
+        logoutLi.style.display = 'inline-block';
+      } else {
+        loginLi.style.display = 'inline-block';
+        userLi.style.display = 'none';
+        logoutLi.style.display = 'none';
+      }
+    }
+
+    checkLoginStatus();
+  </script>
+</body>
+</html>

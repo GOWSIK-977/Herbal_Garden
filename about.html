@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us - Virtual Herbal Garden</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .top-nav {
+      background: linear-gradient(135deg, #2e7d32, #1b5e20);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-nav .logo {
+      font-size: 1.5rem;
+    }
+
+    .top-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .top-nav a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero-about {
+      background-color: #e8f5e9;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .hero-about h1 {
+      font-size: 2.5rem;
+      color: #1b5e20;
+    }
+
+    .about-section {
+      padding: 60px 20px;
+      background-color: #ffffff;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .about-section h2 {
+      color: #1b5e20;
+      margin-bottom: 20px;
+    }
+
+    .about-section p {
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .systems-section {
+      background-color: #f8fbf8;
+      padding: 60px 20px;
+    }
+
+    .system-card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .system-card {
+      flex: 1 1 250px;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .system-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .system-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    .system-card h3 {
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+
+    .system-card p {
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      background-color: #1b5e20;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    a.system-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="top-nav">
+    <div class="logo">🌿 Virtual Herbal Garden</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">HOME</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-about">
+    <h1>About Virtual Herbal Garden</h1>
+  </section>
+
+  <!-- About Description -->
+  <section class="about-section">
+    <div class="container">
+      <h2>Our Mission</h2>
+      <p>
+        The Virtual Herbal Garden is dedicated to bridging the ancient wisdom of herbal medicine with the digital age. Our goal is to promote awareness, learning, and accessibility to India's rich tradition of herbal practices rooted in the AYUSH systems — Ayurveda, Yoga, Unani, Siddha, and Homeopathy.
+      </p>
+      <p>
+        Whether you are a student, a researcher, or an enthusiast of natural remedies, our platform empowers you to explore, search, and understand herbal plants and their uses — all from the comfort of your screen.
+      </p>
+    </div>
+  </section>
+
+  <!-- AYUSH Systems -->
+  <section class="systems-section">
+    <div class="container">
+      <h2>What is AYUSH?</h2>
+      <p>
+        AYUSH stands for Ayurveda, Yoga, Unani, Siddha, and Homeopathy — five traditional systems of medicine practiced in India and recognized by the Government. These systems emphasize holistic healing, focusing on preventive care, natural remedies, and well-being.
+      </p>
+
+      <div class="system-card-container">
+        <a href="ayurveda.html" class="system-link">
+          <div class="system-card">
+            <img src="images/ayurveda.jpg" alt="Ayurveda" />
+            <h3>Ayurveda</h3>
+            <p>Focuses on balancing body systems using diet, herbs, detox, and lifestyle practices.</p>
+          </div>
+        </a>
+
+        <a href="yoga.html" class="system-link">
+          <div class="system-card">
+            <img src="images/yoga.jpg" alt="Yoga" />
+            <h3>Yoga</h3>
+            <p>Combines physical postures, breathing exercises, and meditation for holistic wellness.</p>
+          </div>
+        </a>
+
+        <a href="unani.html" class="system-link">
+          <div class="system-card">
+            <img src="images/unani.webp" alt="Unani" />
+            <h3>Unani</h3>
+            <p>Based on the concept of the four humors, focusing on natural healing and balance.</p>
+          </div>
+        </a>
+
+        <a href="siddha.html" class="system-link">
+          <div class="system-card">
+            <img src="images/siddha.webp" alt="Siddha" />
+            <h3>Siddha</h3>
+            <p>Ancient Tamil medical system based on alchemy, herbs, and spiritual practices.</p>
+          </div>
+        </a>
+
+        <a href="homeopathy.html" class="system-link">
+          <div class="system-card">
+            <img src="images/homopathy.jpg" alt="Homeopathy" />
+            <h3>Homeopathy</h3>
+            <p>Uses highly diluted substances to trigger the body's natural healing response.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 Ayurvista - Virtual Herbal Garden | Developed for AYUSH Awareness</p>
+      <p>Contact: info@ayurvista.org | Phone: +91-12345-67890</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+[
+  {
+    "id": "chn-avs-egmore",
+    "name": "Kottakkal Arya Vaidya Sala",
+    "type": "Ayurveda",
+    "address": "No.7, Pantheon Road, Egmore, Chennai - 600008",
+    "phone": "+91-44-2819 3019",
+    "district": "Chennai",
+    "lat": 13.0699,
+    "lng": 80.2593,
+    "hours": "Mon-Sat 9:00-19:00",
+    "verified": true,
+    "map": "https://maps.google.com/maps?q=Kottakkal+Arya+Vaidya+Sala+Egmore+Chennai",
+    "herbs": ["Tulsi", "Neem", "Ashwagandha", "Amla", "Triphala"]
+  },
+  {
+    "id": "chn-avp-nungambakkam",
+    "name": "AVP Ayurveda Medical Centre",
+    "type": "Ayurveda",
+    "address": "No.44, Khader Nawaz Khan Road, Nungambakkam, Chennai - 600006",
+    "phone": "+91-44-2833 7788",
+    "district": "Chennai",
+    "lat": 13.0587,
+    "lng": 80.2515,
+    "hours": "Mon-Sat 9:00-18:00",
+    "verified": true,
+    "map": "https://maps.google.com/maps?q=AVP+Ayurveda+Medical+Centre+Nungambakkam+Chennai",
+    "herbs": ["Brahmi", "Shankhpushpi", "Ashwagandha", "Turmeric", "Giloy"]
+  },
+  {
+    "id": "cbe-avs-avinashi",
+    "name": "Kottakkal Arya Vaidya Sala",
+    "type": "Ayurveda",
+    "address": "No.1090/1091, Avinashi Road, Coimbatore - 641018",
+    "phone": "+91-422-2240 241",
+    "district": "Coimbatore",
+    "lat": 11.0022,
+    "lng": 76.9767,
+    "hours": "Mon-Sat 9:00-19:00",
+    "verified": true,
+    "map": "https://maps.google.com/maps?q=Kottakkal+Arya+Vaidya+Sala+Avinashi+Road+Coimbatore",
+    "herbs": ["Amla", "Neem", "Triphala", "Moringa", "Tulsi"]
+  },
+  {
+    "id": "mad-arya-north-veli",
+    "name": "Kottakkal Arya Vaidya Sala",
+    "type": "Ayurveda",
+    "address": "No.14, North Veli Street, Madurai - 625001",
+    "phone": "+91-452-2342 567",
+    "district": "Madurai",
+    "lat": 9.9195,
+    "lng": 78.1208,
+    "hours": "Mon-Sat 9:00-19:00",
+    "verified": true,
+    "map": "https://maps.google.com/maps?q=Kottakkal+Arya+Vaidya+Sala+North+Veli+Street+Madurai",
+    "herbs": ["Turmeric", "Giloy", "Ashoka", "Aloe Vera", "Neem"]
+  },
+  {
+    "id": "salem-nagarjuna-brindavan",
+    "name": "Nagarjuna Ayurvedic Centre",
+    "type": "Ayurveda",
+    "address": "Brindavan Road, Salem - 636004",
+    "phone": "+91-427-2340 123",
+    "district": "Salem",
+    "lat": 11.6643,
+    "lng": 78.1460,
+    "hours": "Mon-Sat 9:00-18:00",
+    "verified": true,
+    "map": "https://maps.google.com/maps?q=Nagarjuna+Ayurvedic+Centre+Brindavan+Road+Salem",
+    "herbs": ["Ashwagandha", "Tulsi", "Triphala", "Brahmi"]
+  }
+]

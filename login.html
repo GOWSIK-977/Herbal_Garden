@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Virtual Herbal Garden</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-light: #4caf50;
+      --primary-dark: #1b5e20;
+      --accent: #ffeb3b;
+      --text: #333;
+      --text-light: #666;
+      --background: #f8fbf8;
+      --card-bg: #ffffff;
+      --muted: #9e9e9e;
+      --border: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+      --error: #f44336;
+      --success: #4caf50;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(rgba(46, 125, 50, 0.85), rgba(46, 125, 50, 0.85)), 
+                  url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.2"/></svg>');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .leaf-decoration {
+      position: absolute;
+      opacity: 0.1;
+      z-index: 0;
+    }
+
+    .leaf-1 {
+      top: 10%;
+      left: 10%;
+      font-size: 120px;
+      transform: rotate(-15deg);
+      color: white;
+    }
+
+    .leaf-2 {
+      bottom: 10%;
+      right: 10%;
+      font-size: 100px;
+      transform: rotate(15deg);
+      color: white;
+    }
+
+    .form-container {
+      background: var(--card-bg);
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-hover);
+      width: 100%;
+      max-width: 480px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      transition: var(--transition);
+    }
+
+    .form-container:hover {
+      transform: translateY(-5px);
+    }
+
+    .logo {
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary);
+    }
+
+    .logo-icon {
+      font-size: 32px;
+    }
+
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .form-container h2 {
+      margin-bottom: 25px;
+      color: var(--primary-dark);
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      text-align: left;
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-group i {
+      color: var(--primary);
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 16px 14px 40px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .input-group input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+      outline: none;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 12px;
+      top: 38px;
+      color: var(--muted);
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 12px;
+      top: 38px;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .remember {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text);
+    }
+
+    .forgot-password {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .forgot-password:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .error-message {
+      color: var(--error);
+      font-size: 14px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .success-message {
+      color: var(--success);
+      font-size: 14px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .separator {
+      display: flex;
+      align-items: center;
+      margin: 25px 0;
+      color: var(--muted);
+    }
+
+    .separator::before,
+    .separator::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background-color: var(--border);
+    }
+
+    .separator span {
+      padding: 0 15px;
+      font-size: 14px;
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .social-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f5f5;
+      color: var(--text);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+
+    .google-btn:hover {
+      background: #db4a39;
+      color: white;
+    }
+
+    .facebook-btn:hover {
+      background: #3b5998;
+      color: white;
+    }
+
+    .register-link {
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .register-link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .register-link a:hover {
+      color: var(--primary-dark);
+      text-decoration: underline;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .back-link:hover {
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 480px) {
+      .form-container {
+        padding: 30px 20px;
+      }
+      
+      .remember-forgot {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      
+      .leaf-1, .leaf-2 {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="leaf-decoration leaf-1">
+    <i class="fas fa-leaf"></i>
+  </div>
+  <div class="leaf-decoration leaf-2">
+    <i class="fas fa-leaf"></i>
+  </div>
+
+  <div class="form-container">
+    <a href="index.html" class="back-link">
+      <i class="fas fa-arrow-left"></i> Back to Shop
+    </a>
+
+    <div class="logo">
+      <i class="fas fa-leaf logo-icon"></i>
+      <span class="logo-text">Virtual Herbal Garden</span>
+    </div>
+    
+    <h2>Welcome Back</h2>
+    
+    <form id="loginForm">
+      <div class="input-group">
+        <label for="email">
+          <i class="fas fa-envelope"></i>
+          Email Address
+        </label>
+        <i class="fas fa-envelope input-icon"></i>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="input-group">
+        <label for="password">
+          <i class="fas fa-lock"></i>
+          Password
+        </label>
+        <i class="fas fa-lock input-icon"></i>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <span class="password-toggle" id="passwordToggle"><i class="fas fa-eye"></i></span>
+      </div>
+
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+
+      <div class="remember-forgot">
+        <label class="remember">
+          <input type="checkbox" id="remember" name="remember">
+          <span>Remember me</span>
+        </label>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="submit-btn" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i>
+        Login
+      </button>
+    </form>
+
+    <div class="separator">
+      <span>Or continue with</span>
+    </div>
+
+    <div class="social-login">
+      <button class="social-btn google-btn">
+        <i class="fab fa-google"></i>
+      </button>
+      <button class="social-btn facebook-btn">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+    </div>
+
+    <p class="register-link">
+      Don't have an account? <a href="register.html">Create one here</a>
+    </p>
+  </div>
+
+  <script>
+    const API_URL = 'http://localhost:5000/api';
+
+    // Toggle password visibility
+    document.getElementById('passwordToggle').addEventListener('click', function() {
+      const pwd = document.getElementById('password');
+      if (pwd.type === 'password') {
+        pwd.type = 'text';
+        this.innerHTML = '<i class="fas fa-eye-slash"></i>';
+      } else {
+        pwd.type = 'password';
+        this.innerHTML = '<i class="fas fa-eye"></i>';
+      }
+    });
+
+    // Login form submission
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const remember = document.getElementById('remember').checked;
+      
+      const errorMessage = document.getElementById('errorMessage');
+      const successMessage = document.getElementById('successMessage');
+      const loginBtn = document.getElementById('loginBtn');
+      
+      // Clear previous messages
+      errorMessage.style.display = 'none';
+      successMessage.style.display = 'none';
+      
+      // Basic validation
+      if (!email || !password) {
+        errorMessage.textContent = 'Please enter both email and password';
+        errorMessage.style.display = 'block';
+        return;
+      }
+
+      // Show loading state
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
+      try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          // Store token and user data
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          
+          // Align session management for other pages like index.html
+          const loggedInUser = {
+            name: data.user.fullName,
+            email: data.user.email,
+            id: data.user._id,
+            role: data.user.role
+          };
+          localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
+          
+          if (remember) {
+            localStorage.setItem('rememberedEmail', email);
+          }
+
+          successMessage.textContent = 'Login successful! Redirecting...';
+          successMessage.style.display = 'block';
+          
+          loginBtn.innerHTML = '<i class="fas fa-check"></i> Success!';
+          loginBtn.style.background = '#4caf50';
+
+          setTimeout(() => {
+            window.location.href = 'index.html?login=success';
+          }, 800);
+        } else {
+          errorMessage.textContent = data.message || 'Login failed. Please try again.';
+          errorMessage.style.display = 'block';
+          
+          loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+          loginBtn.disabled = false;
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        errorMessage.textContent = 'Network error. Please check your connection.';
+        errorMessage.style.display = 'block';
+        
+        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+        loginBtn.disabled = false;
+      }
+    });
+
+    // Pre-fill email if remembered
+    window.addEventListener('DOMContentLoaded', () => {
+      const rememberedEmail = localStorage.getItem('rememberedEmail');
+      if (rememberedEmail) {
+        document.getElementById('email').value = rememberedEmail;
+        document.getElementById('remember').checked = true;
+      }
+    });
+  </script>
+</body>
+</html>

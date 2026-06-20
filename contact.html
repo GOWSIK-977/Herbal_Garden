@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Us - Virtual Herbal Garden</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #2e7d32;
+      --primary-light: #4caf50;
+      --primary-dark: #1b5e20;
+      --accent: #ffeb3b;
+      --text: #333;
+      --text-light: #666;
+      --background: #f8fbf8;
+      --card-bg: #ffffff;
+      --muted: #9e9e9e;
+      --border: #e0e0e0;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.15);
+      --radius: 12px;
+      --transition: all 0.3s ease;
+      --error: #f44336;
+      --success: #4caf50;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    .top-nav {
+      background-color: var(--primary-dark);
+      color: white;
+      padding: 16px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: white;
+    }
+
+    .logo-icon {
+      font-size: 24px;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 24px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-menu li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-menu li a:hover {
+      color: var(--accent);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 25px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      width: 100%;
+      height: 3px;
+      background-color: white;
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 60px 5%;
+      color: var(--text);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      text-align: center;
+      color: var(--primary-dark);
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .intro-text {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 50px;
+      color: var(--text-light);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .contact-form {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: var(--primary-dark);
+    }
+
+    .form-input {
+      padding: 14px 16px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+      outline: none;
+    }
+
+    .form-textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 16px;
+      font-size: 16px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    .form-message {
+      padding: 12px;
+      border-radius: var(--radius);
+      display: none;
+      font-weight: 500;
+    }
+
+    .form-message.success {
+      display: block;
+      background: #e8f5e9;
+      color: var(--success);
+      border: 1px solid var(--success);
+    }
+
+    .form-message.error {
+      display: block;
+      background: #ffebee;
+      color: var(--error);
+      border: 1px solid var(--error);
+    }
+
+    .contact-info {
+      background-color: #f1f8f4;
+      padding: 30px;
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .info-title {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-bottom: 15px;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .info-text {
+      color: var(--text);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+    }
+
+    /* Map Section */
+    .map-section {
+      margin-top: 60px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 350px;
+      background: #e8f5e9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      gap: 15px;
+    }
+
+    .map-placeholder i {
+      font-size: 48px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary-dark);
+      color: white;
+      text-align: center;
+      padding: 40px 5%;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      text-align: left;
+      margin-bottom: 30px;
+    }
+
+    .footer-column h3 {
+      color: var(--accent);
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+
+    .footer-column p {
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .footer-column a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .footer-column a:hover {
+      color: var(--accent);
+    }
+
+    .copyright {
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .contact-form, .contact-info {
+        padding: 25px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary-dark);
+        padding: 20px;
+        gap: 15px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        z-index: 100;
+      }
+      
+      .nav-menu.active {
+        display: flex;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .intro-text {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .top-nav {
+        padding: 12px 4%;
+      }
+      
+      .contact-section {
+        padding: 40px 4%;
+      }
+      
+      .contact-form, .contact-info {
+        padding: 20px;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="top-nav">
+    <a href="index.html" class="logo">
+      <i class="fas fa-leaf logo-icon"></i>
+      <span class="logo-text">Virtual Herbal Garden</span>
+    </a>
+    
+    <div class="menu-toggle" id="mobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="index.html"><i class="fas fa-shopping-cart"></i> Shop</a></li>
+      <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+      <li><a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+    </ul>
+  </header>
+
+  <!-- Contact Us Section -->
+  <section class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="intro-text">We'd love to hear from you! Whether you have questions about our herbal products, need guidance, or want to share feedback, our team is here to help.</p>
+
+      <div class="contact-wrapper">
+        <!-- Contact Form -->
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label class="form-label" for="name">Your Name</label>
+            <input type="text" id="name" class="form-input" placeholder="Enter your full name" required />
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input type="email" id="email" class="form-input" placeholder="Enter your email address" required />
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="subject">Subject</label>
+            <input type="text" id="subject" class="form-input" placeholder="What is this regarding?" required />
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="message">Your Message</label>
+            <textarea id="message" class="form-input form-textarea" placeholder="Tell us how we can help you..." required></textarea>
+          </div>
+          
+          <div id="formMessage" class="form-message"></div>
+          
+          <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fas fa-paper-plane"></i>
+            Send Message
+          </button>
+        </form>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+          <h3 class="info-title">
+            <i class="fas fa-info-circle"></i>
+            Our Contact Details
+          </h3>
+          
+          <div class="info-item">
+            <span class="info-label">Email:</span>
+            <span class="info-text">info@ayurvista.org</span>
+          </div>
+          
+          <div class="info-item">
+            <span class="info-label">Phone:</span>
+            <span class="info-text">+91-12345-67890</span>
+          </div>
+          
+          <div class="info-item">
+            <span class="info-label">Address:</span>
+            <span class="info-text">Ayurvista Herbal Research Center, Bengaluru, India</span>
+          </div>
+          
+          <div class="info-item">
+            <span class="info-label">Business Hours:</span>
+            <span class="info-text">Monday - Saturday: 9AM to 6PM</span>
+          </div>
+          
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Map Section -->
+      <div class="map-section">
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt"></i>
+          <h3>Our Location</h3>
+          <p>Ayurvista Herbal Research Center, Bengaluru, India</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-column">
+          <h3>Virtual Herbal Garden</h3>
+          <p>Discover the healing power of nature through our comprehensive database of medicinal plants and traditional remedies.</p>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <p><a href="index.html">Home</a></p>
+          <p><a href="index.html">Shop Herbal Products</a></p>
+          <p><a href="contact.html">Contact Us</a></p>
+        </div>
+        
+        <div class="footer-column">
+          <h3>Contact Info</h3>
+          <p>Email: info@ayurvista.org</p>
+          <p>Phone: +91-12345-67890</p>
+          <p>Address: Bengaluru, India</p>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>© 2025 Ayurvista - Virtual Herbal Garden | Created for Ayush Awareness</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const API_URL = 'http://localhost:5000/api';
+
+    // Mobile menu toggle
+    const mobileMenu = document.getElementById('mobileMenu');
+    const navMenu = document.getElementById('navMenu');
+    
+    mobileMenu.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subject = document.getElementById('subject').value.trim();
+      const message = document.getElementById('message').value.trim();
+      
+      const submitBtn = document.getElementById('submitBtn');
+      const formMessage = document.getElementById('formMessage');
+      
+      // Clear previous message
+      formMessage.className = 'form-message';
+      formMessage.textContent = '';
+      
+      // Validate
+      if (!name || !email || !subject || !message) {
+        formMessage.className = 'form-message error';
+        formMessage.textContent = 'Please fill in all fields';
+        return;
+      }
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+      
+      try {
+        const response = await fetch(`${API_URL}/contact`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ name, email, subject, message })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+          formMessage.className = 'form-message success';
+          formMessage.textContent = data.message || 'Thank you for contacting us! We will reply soon.';
+          
+          submitBtn.innerHTML = '<i class="fas fa-check"></i> Sent Successfully';
+          submitBtn.style.background = '#4caf50';
+          
+          // Reset form
+          document.getElementById('contactForm').reset();
+          
+          setTimeout(() => {
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+            submitBtn.style.background = '';
+            submitBtn.disabled = false;
+          }, 3000);
+        } else {
+          formMessage.className = 'form-message error';
+          formMessage.textContent = data.message || 'Failed to send message. Please try again.';
+          
+          submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+          submitBtn.disabled = false;
+        }
+      } catch (error) {
+        console.error('Contact form error:', error);
+        formMessage.className = 'form-message error';
+        formMessage.textContent = 'Network error. Please check your connection and try again.';
+        
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

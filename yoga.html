@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yoga - Virtual Herbal Garden</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header, .footer {
+      background-color: #2d6a4f;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .back-button-container {
+      text-align: left;
+      max-width: 900px;
+      margin: 20px auto 0 auto;
+      padding-left: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .back-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #40916c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      background-color: #1b4332;
+    }
+
+    .content {
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .content h1, .content h2 {
+      color: #1b4332;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .content ul {
+      padding-left: 20px;
+      color: #333;
+    }
+
+    .content ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1 id="title">Yoga</h1>
+  </div>
+
+  <!-- Back Button -->
+  <div class="back-button-container">
+    <button class="back-button" onclick="history.back()">← Back</button>
+  </div>
+
+  <div class="content" id="content">
+    <!-- Content will be inserted dynamically -->
+  </div>
+
+  <div class="footer">
+    <p>© 2025 Ayurvista - Virtual Herbal Garden</p>
+  </div>
+
+  <script>
+    let currentLang = "en";
+
+    const contentData = {
+      en: `
+        <h2>What is Yoga?</h2>
+        <p>
+          Yoga is a spiritual and physical discipline that originated in ancient India. 
+          It unites the body, mind, and soul through physical postures (asanas), breathing techniques (pranayama), and meditation (dhyana).
+        </p>
+        <p>
+          Rooted in Indian philosophy, yoga is not just exercise—it is a way of life that promotes mental clarity, emotional balance, and spiritual growth. 
+          Today, yoga is practiced worldwide for its immense health benefits.
+        </p>
+
+        <h2>Key Components of Yoga</h2>
+        <ul>
+          <li><strong>Asanas:</strong> Physical postures that enhance flexibility, strength, and balance.</li>
+          <li><strong>Pranayama:</strong> Breathing exercises that regulate life force and reduce stress.</li>
+          <li><strong>Dhyana:</strong> Meditation to improve focus, inner peace, and spiritual awareness.</li>
+          <li><strong>Yamas & Niyamas:</strong> Ethical principles and personal disciplines for a balanced life.</li>
+          <li><strong>Relaxation:</strong> Techniques like Shavasana help calm the nervous system.</li>
+        </ul>
+
+        <h2>Benefits of Practicing Yoga</h2>
+        <ul>
+          <li>Improves flexibility, strength, and posture</li>
+          <li>Reduces stress, anxiety, and depression</li>
+          <li>Boosts immunity and energy levels</li>
+          <li>Enhances lung capacity and heart health</li>
+          <li>Promotes mindfulness and emotional balance</li>
+        </ul>
+
+        <h2>Popular Styles of Yoga</h2>
+        <ul>
+          <li><strong>Hatha Yoga:</strong> Gentle and suitable for beginners</li>
+          <li><strong>Vinyasa Yoga:</strong> Dynamic flow linking breath with movement</li>
+          <li><strong>Ashtanga Yoga:</strong> Structured and physically demanding</li>
+          <li><strong>Kundalini Yoga:</strong> Focuses on energy awakening and meditation</li>
+          <li><strong>Iyengar Yoga:</strong> Precision-based with the use of props</li>
+        </ul>
+
+        <h2>Yoga and AYUSH</h2>
+        <p>
+          The Ministry of AYUSH promotes yoga as a key system for preventive health and holistic well-being. 
+          The International Day of Yoga (June 21st), recognized by the United Nations, highlights India’s global contribution through yoga.
+        </p>
+        <p>
+          Yoga is now integrated into wellness centers, hospitals, schools, and corporate spaces worldwide for its preventive and therapeutic effects.
+        </p>
+      `,
+
+      ta: `
+        <h2>யோகா என்றால் என்ன?</h2>
+        <p>
+          யோகா என்பது இந்தியாவில் தோன்றிய ஆன்மீக மற்றும் உடல் ஒழுங்குமுறை. 
+          இது உடல், மனம் மற்றும் ஆன்மாவை உடற்பயிற்சி (ஆசனங்கள்), மூச்சுப் பயிற்சிகள் (பிராணாயாமா) மற்றும் தியானம் (தியானா) மூலம் ஒன்றிணைக்கிறது.
+        </p>
+        <p>
+          இந்திய தத்துவத்தில் வேரூன்றிய யோகா, வெறும் உடற்பயிற்சி அல்ல — 
+          இது மன தெளிவு, உணர்ச்சி சமநிலை மற்றும் ஆன்மீக வளர்ச்சியை ஊக்குவிக்கும் வாழ்க்கை முறை. 
+          இன்று, உலகம் முழுவதும் யோகா அதன் பேராரோக்கிய நன்மைகளுக்காக பயிற்சிக்கப்படுகிறது.
+        </p>
+
+        <h2>யோகாவின் முக்கிய கூறுகள்</h2>
+        <ul>
+          <li><strong>ஆசனங்கள்:</strong> நெகிழ்வுத்தன்மை, வலிமை மற்றும் சமநிலையை மேம்படுத்தும் உடற்பயிற்சிகள்.</li>
+          <li><strong>பிராணாயாமா:</strong> உயிர்சக்தியை ஒழுங்குபடுத்தும் மற்றும் மன அழுத்தத்தை குறைக்கும் மூச்சுப்பயிற்சிகள்.</li>
+          <li><strong>தியானா:</strong> கவனம், உள்ளார்ந்த அமைதி மற்றும் ஆன்மீக விழிப்புணர்வை மேம்படுத்தும் தியானம்.</li>
+          <li><strong>யமங்கள் & నియமங்கள்:</strong> சமநிலையான வாழ்க்கைக்கான ஒழுக்க விதிமுறைகள்.</li>
+          <li><strong>ஓய்வு:</strong> சவாசனம் போன்ற தொழில்நுட்பங்கள் நரம்பு மண்டலத்தை அமைதிப்படுத்தும்.</li>
+        </ul>
+
+        <h2>யோகாவின் நன்மைகள்</h2>
+        <ul>
+          <li>நெகிழ்வுத்தன்மை, வலிமை மற்றும் உடலமைப்பை மேம்படுத்துகிறது</li>
+          <li>மன அழுத்தம், கவலை, மனச்சோர்வை குறைக்கிறது</li>
+          <li>நோய் எதிர்ப்பு சக்தி மற்றும் ஆற்றல் மட்டத்தை அதிகரிக்கிறது</li>
+          <li>நுரையீரல் திறன் மற்றும் இதய ஆரோக்கியத்தை மேம்படுத்துகிறது</li>
+          <li>கவனயோகம் மற்றும் உணர்ச்சி சமநிலையை ஊக்குவிக்கிறது</li>
+        </ul>
+
+        <h2>யோகாவின் பிரபல பாணிகள்</h2>
+        <ul>
+          <li><strong>ஹத யோகா:</strong> மென்மையானது, தொடக்க நிலை பயிற்சியாளர்களுக்கு ஏற்றது</li>
+          <li><strong>வின்யாச யோகா:</strong> மூச்சுடன் இணைந்த சுறுசுறுப்பு இயக்கம்</li>
+          <li><strong>அஷ்டாங்க யோகா:</strong> கட்டமைக்கப்பட்ட மற்றும் உடல் சவாலானது</li>
+          <li><strong>குண்டலினி யோகா:</strong> சக்தி விழிப்புணர்வையும் தியானத்தையும் கவனிக்கும்</li>
+          <li><strong>ஐயங்கார் யோகா:</strong> கருவிகளைப் பயன்படுத்தி துல்லிய அடிப்படையிலான பயிற்சி</li>
+        </ul>
+
+        <h2>யோகா மற்றும் ஆயுஷ்</h2>
+        <p>
+          தடுப்பு ஆரோக்கியம் மற்றும் முழுமையான நலனுக்கான முக்கிய முறையாக யோகாவை ஆயுஷ் அமைச்சகம் ஊக்குவிக்கிறது. 
+          ஐ.நா அங்கீகரித்த யோகா தினம் (ஜூன் 21) இந்தியாவின் உலகளாவிய பங்களிப்பை வலியுறுத்துகிறது.
+        </p>
+        <p>
+          இன்று, யோகா நலமையங்கள், மருத்துவமனைகள், பள்ளிகள் மற்றும் நிறுவனங்களில் தடுப்பு மற்றும் சிகிச்சை பயன்களுக்காக ஒருங்கிணைக்கப்பட்டுள்ளது.
+        </p>
+      `
+    };
+
+    // Initial load
+    document.getElementById("content").innerHTML = contentData["en"];
+    document.getElementById("title").innerText = "Yoga";
+  </script>
+</body>
+</html>

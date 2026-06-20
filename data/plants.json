@@ -1,0 +1,82 @@
+{
+  "Tulsi": {
+    "name": "Tulsi",
+    "scientific": "Ocimum tenuiflorum",
+    "diseases_cured": ["cold", "cough", "flu", "fever", "stress"],
+    "uses": "Leaves used to make herbal tea for immunity and respiratory relief.",
+    "preparation": [
+      {"type": "tea", "steps": "Boil 6-8 fresh leaves in a cup of water for 5 minutes. Add honey and lemon."},
+      {"type": "chew", "steps": "Chew 3-5 fresh leaves daily in the morning."}
+    ],
+    "region": "Widely grown across India in home gardens.",
+    "image": "images/tulsi.jpg",
+    "description": "Holy Basil used in Ayurveda for respiratory infections and immunity support.",
+    "tags": ["immunity", "respiratory", "antioxidant"]
+  },
+  "Neem": {
+    "name": "Neem",
+    "scientific": "Azadirachta indica",
+    "diseases_cured": ["skin infection", "acne", "fever", "diabetes"],
+    "uses": "Antibacterial and antifungal leaves and bark used for skin and detox.",
+    "preparation": [
+      {"type": "paste", "steps": "Grind fresh leaves with water. Apply to affected skin for 15-20 minutes."},
+      {"type": "decoction", "steps": "Boil neem leaves in water for 10 minutes; drink after cooling (consult practitioner)."}
+    ],
+    "region": "Tropical and semi-tropical regions of India.",
+    "image": "images/Neem.jpg",
+    "description": "Powerful detoxifying herb common in traditional remedies.",
+    "tags": ["skin", "detox", "antibacterial"]
+  },
+  "Ashwagandha": {
+    "name": "Ashwagandha",
+    "scientific": "Withania somnifera",
+    "diseases_cured": ["stress", "anxiety", "insomnia", "fatigue"],
+    "uses": "Adaptogen supporting stress relief and vitality.",
+    "preparation": [
+      {"type": "powder", "steps": "Mix 1 tsp powder in warm milk with honey at night."}
+    ],
+    "region": "Drier regions of India.",
+    "image": "images/Ashwagandha.jpg",
+    "description": "Popular adaptogen used for energy, sleep, and stress resilience.",
+    "tags": ["adaptogen", "stress", "sleep"]
+  },
+  "Brahmi": {
+    "name": "Brahmi",
+    "scientific": "Bacopa monnieri",
+    "diseases_cured": ["anxiety", "memory issues", "attention"],
+    "uses": "Improves memory and cognitive function.",
+    "preparation": [
+      {"type": "juice", "steps": "Crush fresh leaves and strain; take 1-2 tsp with water or honey."}
+    ],
+    "region": "Wet, marshy areas across India.",
+    "image": "images/Brahmi.jpg",
+    "description": "Nootropic herb for focus, memory and calmness.",
+    "tags": ["memory", "brain", "calming"]
+  },
+  "Ginger": {
+    "name": "Ginger",
+    "scientific": "Zingiber officinale",
+    "diseases_cured": ["nausea", "cold", "cough", "indigestion"],
+    "uses": "Warming digestive and anti-nausea herb.",
+    "preparation": [
+      {"type": "tea", "steps": "Boil sliced fresh ginger in water 5-7 minutes; add lemon."}
+    ],
+    "region": "Cultivated widely.",
+    "image": "images/ginger.jpg",
+    "description": "Common kitchen remedy for colds and digestion.",
+    "tags": ["digestive", "warming", "respiratory"]
+  },
+  "Amla": {
+    "name": "Amla",
+    "scientific": "Phyllanthus emblica",
+    "diseases_cured": ["immunity", "digestion", "diabetes"],
+    "uses": "Rich in Vitamin C; rejuvenative.",
+    "preparation": [
+      {"type": "juice", "steps": "Blend fresh amla with water; strain. Take 20-30 ml diluted."}
+    ],
+    "region": "Across India.",
+    "image": "images/amla.jpg",
+    "description": "Emblica fruit used in Triphala and tonics.",
+    "tags": ["vitamin-c", "rejuvenation", "immunity"]
+  }
+}

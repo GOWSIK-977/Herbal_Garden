@@ -1,0 +1,57 @@
+{
+  "expo": {
+    "name": "SafeSpace",
+    "slug": "safespace-anonymous-stress-sharing",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+
+    "splash": {
+      "backgroundColor": "#0f0c29",
+      "resizeMode": "contain"
+    },
+
+    "assetBundlePatterns": ["**/*"],
+
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yourname.safespace",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "This app allows you to record voice messages for stress sharing (optional).",
+        "NSCameraUsageDescription": "This app does not use camera."
+      }
+    },
+
+    "android": {
+      "package": "com.yourname.safespace",
+      "usesCleartextTraffic": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f0c29"
+      },
+      "permissions": [
+        "RECORD_AUDIO",
+        "MODIFY_AUDIO_SETTINGS",
+        "INTERNET",
+        "ACCESS_NETWORK_STATE"
+      ]
+    },
+
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+
+    "plugins": ["expo-font"],
+
+    "experiments": {
+      "tsconfigPaths": true
+    },
+
+    "extra": {
+      "eas": {
+        "projectId": "your-project-id-here"
+      }
+    }
+  }
+}
